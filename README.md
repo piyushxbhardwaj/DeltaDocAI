@@ -10,6 +10,8 @@
 
 > **AI-powered engineering document comparison with delta analysis, grounded RAG chat, OCR, and visual diff generation.**
 
+![DeltaDoc AI Social Preview](assets/social_preview.png)
+
 ---
 
 ## 💡 Why DeltaDoc AI?
@@ -21,6 +23,8 @@ DeltaDoc AI automates this engineering workflow by:
 - **Detecting granular modifications** using a multi-factor weighted matching algorithm.
 - **Rendering annotated visual diff overlays** highlighting added, removed, and modified elements.
 - **Enabling grounded, cited conversational Q&A** over revision histories using RAG and Gemini 2.5 Flash.
+
+![Visual Diff Overlay Preview](assets/visual_diff_preview.png)
 
 ---
 
