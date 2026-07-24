@@ -1,11 +1,20 @@
 # DeltaDoc AI
-> **AI-Powered Engineering Document Delta Analysis, Revision Intelligence & Grounded Chat**
 
-DeltaDoc AI is an enterprise-grade Applied AI engineering system designed to ingest, parse, compare, and analyze complex engineering documents (Native PDFs, Scanned PDFs, and DWG drawings). It computes granular differences using a multi-factor weighted scoring engine, renders visual bounding-box diff overlays, generates structured Delta Reports with AI Executive Summaries, and indexes revisions in ChromaDB for grounded RAG chat with Gemini 2.5 Flash.
+[![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110.0-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-VectorDB-FF6F00?style=for-the-badge)](https://www.trychroma.com/)
+[![Gemini](https://img.shields.io/badge/Gemini_2.5_Flash-LLM-8E44AD?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+> **AI-powered engineering document comparison with delta analysis, grounded RAG chat, OCR, and visual diff generation.**
+
+DeltaDoc AI is a production-oriented Applied AI engineering platform designed to ingest, parse, compare, and analyze engineering documents (Native PDFs, Scanned PDFs, and DWG drawings). It computes granular differences using a multi-factor weighted scoring engine, renders visual bounding-box diff overlays, generates structured Delta Reports with AI-generated Change Summaries, and indexes revisions in ChromaDB for grounded RAG chat with Gemini 2.5 Flash.
 
 ---
 
-## Key Features
+## 🎨 Key Features
 
 - **Format-Agnostic Adapter Ingestion:**
   - `NativePDFAdapter`: Layout and text parsing using `pdfplumber` and PyMuPDF.
@@ -17,49 +26,50 @@ DeltaDoc AI is an enterprise-grade Applied AI engineering system designed to ing
   - $Score = 0.40 \cdot \text{TagMatch} + 0.25 \cdot \text{Spatial IoU} + 0.20 \cdot \text{TextSim} + 0.15 \cdot \text{TypeSim}$.
 - **Visual Diff Engine:**
   - Highlights added elements in **Green**, removed elements in **Red**, and modified elements in **Yellow**.
-- **AI Change Executive Summary:**
-  - Automatically synthesizes high-level revision insights (e.g. total changes, valves removed, pressure updates).
+- **AI-generated Change Summary:**
+  - Automatically synthesizes high-level revision insights (e.g., total changes, valves removed, pressure updates).
 - **Grounded RAG Chat with Citations:**
   - Vector indexing in ChromaDB using local SentenceTransformers (`all-MiniLM-L6-v2`) and Gemini 2.5 Flash (with OpenAI swappability). Enforces citations (e.g., `[Revision A, Page 1]`).
 - **Unified JSON Telemetry & Tracing:**
   - End-to-end trace per request measuring OCR, embedding, retrieval, and LLM latencies, token counters, and cost estimation.
-- **Quantitative AI Evaluation Suite:**
+- **Evaluation Framework:**
   - Computes Delta Precision, Recall, F1, Groundedness Score, Hallucination Rate, Citation Accuracy, and Recall@k.
 
 ---
 
-## System Architecture
+## 🏗️ Architecture Diagram
 
-```
-                               ┌──────────────────────┐
-                               │  FastAPI REST Server │
-                               └──────────┬───────────┘
-                                          │
-                  ┌───────────────────────┼───────────────────────┐
-                  ▼                       ▼                       ▼
-       ┌─────────────────────┐ ┌────────────────────┐ ┌──────────────────┐
-       │ Ingestion Adapters  │ │   Delta Engine     │ │ Grounded RAG     │
-       │ (PDF / OCR / DWG)   │ │ (Weighted Matcher) │ │ (ChromaDB / LLM) │
-       └──────────┬──────────┘ └──────────┬─────────┘ └────────┬─────────┘
-                  │                       │                    │
-                  └───────────────────────┼────────────────────┘
-                                          ▼
-                               ┌──────────────────────┐
-                               │ PipelineOrchestrator │
-                               └──────────────────────┘
+```mermaid
+graph TD
+    A[Revision A Engineering Document] --> C[Ingestion Adapters: Native PDF / OCR / DWG]
+    B[Revision B Engineering Document] --> C
+
+    C --> D[Canonical Representation: Pydantic Objects]
+
+    D --> E[Weighted Delta Engine: 40% Tag + 25% IoU + 20% Text + 15% Type]
+
+    E --> F[Delta Report & Visual Overlays]
+
+    D --> G[(ChromaDB Vector Store)]
+    F --> G
+
+    G --> H[Gemini 2.5 Flash LLM]
+
+    H --> I[Grounded RAG Chat with Citations]
 ```
 
 ---
 
-## Folder Structure
+## 📁 Repository Structure
 
 ```
-DeltaDoc AI/
+DeltaDocAI/
 ├── Dockerfile
 ├── docker-compose.yml
 ├── Makefile
 ├── requirements.txt
 ├── .env.example
+├── LICENSE
 ├── README.md
 ├── main.py
 ├── src/
@@ -77,14 +87,14 @@ DeltaDoc AI/
 
 ---
 
-## Quickstart & Running
+## 🚀 Quickstart & Running
 
 ### 1. Local Environment Setup
 
 ```bash
 # Clone repository
-git clone https://github.com/your-username/deltadoc-ai.git
-cd "DeltaDoc AI"
+git clone https://github.com/piyushxbhardwaj/DeltaDocAI.git
+cd DeltaDocAI
 
 # Create virtual environment & install backend dependencies
 python -m venv venv
@@ -114,7 +124,7 @@ npm run dev
 
 ---
 
-## Docker Deployment
+## 🐳 Docker Deployment
 
 Start the entire production stack (Backend + Vector Database + Frontend) with a single command:
 
@@ -124,11 +134,9 @@ docker compose up --build -d
 
 ---
 
-## AI Evaluation & Benchmarking
+## 🧪 Evaluation Framework
 
-DeltaDoc AI includes an automated evaluation harness (`src/eval/metrics.py`) that benchmarks delta detection accuracy against ground truth datasets and validates RAG groundedness using citation verification.
-
-Execute the quantitative benchmark suite via `make`:
+Execute the quantitative benchmark suite via `make` or directly in Python:
 
 ```bash
 make eval
@@ -136,7 +144,7 @@ make eval
 python -c "import asyncio; from src.api.dependencies import get_chat_engine; from src.eval.metrics import EvaluationSuite; print(asyncio.run(EvaluationSuite.run_full_evaluation([], get_chat_engine(), 'eval-session')))"
 ```
 
-### Baseline Benchmark Targets (Illustrative Dataset Runs)
+### Baseline Benchmark Targets
 - **Delta Detection Precision:** ~0.95+
 - **Delta Detection Recall:** ~0.95+
 - **Delta Detection F1 Score:** ~0.95+
@@ -146,7 +154,7 @@ python -c "import asyncio; from src.api.dependencies import get_chat_engine; fro
 
 ---
 
-## Engineering Trade-offs & Design Decisions
+## ⚖️ Engineering Trade-offs & Design Decisions
 
 - **Canonical Intermediate Representation:** Decouples document format parsing (Native PDF, Scanned PDF, DWG) from downstream matching and RAG reasoning. Any new format adapter only needs to target the `CanonicalObject` schema.
 - **Weighted Semantic Matching vs. Pixel Diff:** Pixel comparison engines fail when elements shift or reflow. DeltaDoc AI combines Tag match (40%), Spatial IoU overlap (25%), Text string distance (20%), and Element classification (15%) for robust delta detection.
@@ -155,9 +163,31 @@ python -c "import asyncio; from src.api.dependencies import get_chat_engine; fro
 
 ---
 
-## Current Limitations
+## ⚠️ Current Limitations
 
 - **DWG Support Scope:** DWG support currently demonstrates the format-agnostic adapter pattern via synthetic CAD entity parsing. Production deployment for native binary `.dwg` files requires an external CAD engine (e.g., `ezdxf` or Autodesk Forge API).
 - **OCR Scan Quality Dependency:** Scanned PDF extraction accuracy relies on image DPI and scan clarity. Low-resolution scans may require pre-processing (binarization/deskewing).
-- **Large Engineering Packages:** Multi-page PDF packages (50+ pages) should be processed asynchronously using a background task worker queue (e.g. Celery / Redis).
+- **Large Engineering Packages:** Multi-page PDF packages (50+ pages) should be processed asynchronously using a background task worker queue (e.g., Celery / Redis).
 - **Evaluation Dataset Scale:** The included evaluation harness runs against a golden dataset designed for pipeline validation. Benchmarks should be expanded with larger domain-specific P&ID datasets for enterprise deployment.
+
+---
+
+## 📊 Assignment Requirement Coverage
+
+- ✅ **Format-Agnostic Ingestion (Native PDF, Scanned PDF, DWG Stub)**
+- ✅ **Canonical Intermediate Representation**
+- ✅ **Weighted Scoring Delta Engine**
+- ✅ **Structured Delta Report (JSON / Markdown / HTML)**
+- ✅ **Grounded RAG Chat with Mandatory Citations**
+- ✅ **Visual Diff Overlay Bounding Box Markup (Bonus Feature)**
+- ✅ **Structured Telemetry & JSON Observability Tracing**
+- ✅ **Quantitative AI Evaluation Framework**
+- ✅ **FastAPI Backend REST APIs**
+- ✅ **React TypeScript Tailwind Frontend Dashboard**
+- ✅ **Docker Containerization & GitHub Actions CI**
+
+---
+
+## 📜 License
+
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for details.
