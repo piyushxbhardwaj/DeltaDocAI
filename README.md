@@ -10,7 +10,17 @@
 
 > **AI-powered engineering document comparison with delta analysis, grounded RAG chat, OCR, and visual diff generation.**
 
-DeltaDoc AI is a production-oriented Applied AI engineering platform designed to ingest, parse, compare, and analyze engineering documents (Native PDFs, Scanned PDFs, and DWG drawings). It computes granular differences using a multi-factor weighted scoring engine, renders visual bounding-box diff overlays, generates structured Delta Reports with AI-generated Change Summaries, and indexes revisions in ChromaDB for grounded RAG chat with Gemini 2.5 Flash.
+---
+
+## 💡 Why DeltaDoc AI?
+
+Engineering and operations teams spend significant manual effort cross-referencing complex drawing revisions (P&ID diagrams, mechanical schematics, layout packages). 
+
+DeltaDoc AI automates this engineering workflow by:
+- **Parsing multi-format engineering documents** into a canonical structured representation.
+- **Detecting granular modifications** using a multi-factor weighted matching algorithm.
+- **Rendering annotated visual diff overlays** highlighting added, removed, and modified elements.
+- **Enabling grounded, cited conversational Q&A** over revision histories using RAG and Gemini 2.5 Flash.
 
 ---
 
@@ -23,7 +33,7 @@ DeltaDoc AI is a production-oriented Applied AI engineering platform designed to
 - **Rich Canonical Representation:**
   - Normalizes every object to a common schema (`id`, `type`, `tag`, `page`, `bbox`, `rotation`, `layer`, `confidence`, `metadata`).
 - **Weighted Scoring Matcher:**
-  - $Score = 0.40 \cdot \text{TagMatch} + 0.25 \cdot \text{Spatial IoU} + 0.20 \cdot \text{TextSim} + 0.15 \cdot \text{TypeSim}$.
+  - **Weighted Match Score = 0.40 × Tag Match + 0.25 × Spatial IoU + 0.20 × Text Similarity + 0.15 × Type Similarity**
 - **Visual Diff Engine:**
   - Highlights added elements in **Green**, removed elements in **Red**, and modified elements in **Yellow**.
 - **AI-generated Change Summary:**
